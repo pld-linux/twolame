@@ -1,0 +1,105 @@
+Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
+Summary(pl):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
+Name:		twolame
+Version:	0.3.8
+Release:	1
+License:	LGPL v2.1+
+Group:		Libraries
+Source0:	http://www.ecs.soton.ac.uk/~njh/twolame/%{name}-%{version}.tar.gz
+# Source0-md5:	f1fe7fddfece5c7d01badee0bd703b33
+URL:		http://www.twolame.org/
+BuildRequires:	libsndfile-devel >= 1.0.0
+BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%description
+TwoLAME is an optimized MPEG Audio Layer 2 (MP2) encoder based on
+tooLAME by Mike Cheng, which in turn is based upon the ISO dist10 code
+and portions of LAME.
+
+Features added to TwoLAME:
+ - Fully thread-safe
+ - Static and shared library (libtwolame)
+ - API very similar to LAME's (for easy porting)
+ - C99 compliant
+ - Frontend supports wider range of input files (using libsndfile)
+
+%description -l pl
+TwoLAME to zoptymalizowany koder MPEG Audio Layer 2 (MP2) oparty na
+tooLAME Mike'a Chenga, który z kolei jest oparty na kodzie ISO dist10
+i fragmentach LAME.
+
+Cechy dodane do TwoLAME:
+ - pe³na zgodno¶æ z w±tkami
+ - statyczna i wspó³dzielona biblioteka (libtwolame)
+ - API bardzo podobne do API LAME (dla ³atwego portowania)
+ - zgodno¶æ z C99
+ - frontend obs³uguje wiele rodzajów plików wej¶ciowych (poprzez
+   libsndfile)
+
+%package devel
+Summary:	Header files for TwoLAME library
+Summary(pl):	Pliki nag³ówkowe biblioteki TwoLAME
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Header files for TwoLAME library.
+
+%description devel -l pl
+Pliki nag³ówkowe biblioteki TwoLAME.
+
+%package static
+Summary:	Static TwoLAME library
+Summary(pl):	Statyczna biblioteka TwoLAME
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static TwoLAME library.
+
+%description static -l pl
+Statyczna biblioteka TwoLAME.
+
+%prep
+%setup -q
+
+sed -i -e 's/-O3//' configure
+
+%build
+%configure
+%{__make}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+rm -rf $RPM_BUILD_ROOT%{_docdir}/twolame
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
+%files
+%defattr(644,root,root,755)
+%doc AUTHORS ChangeLog README TODO
+%attr(755,root,root) %{_bindir}/twolame
+%attr(755,root,root) %{_libdir}/libtwolame.so.*.*.*
+%{_mandir}/man1/twolame.1*
+
+%files devel
+%defattr(644,root,root,755)
+%doc doc/html/*
+%attr(755,root,root) %{_libdir}/libtwolame.so
+%{_libdir}/libtwolame.la
+%{_includedir}/twolame.h
+%{_pkgconfigdir}/twolame.pc
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libtwolame.a
