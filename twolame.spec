@@ -8,11 +8,12 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/twolame/%{name}-%{version}.tar.gz
 # Source0-md5:	79be2e6c99495c767d037b977a32eab5
 URL:		http://www.twolame.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.57
+BuildRequires:	automake >= 1:1.7
 BuildRequires:	libsndfile-devel >= 1.0.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,10 +44,15 @@ Cechy dodane do TwoLAME:
 
 %package libs
 Summary:	TwoLAME MP2 encoding library
+Summary(pl):	Biblioteka koduj±ca MP2
 Group:		Libraries
+Conflicts:	twolame < 0.3.9
 
 %description libs
 TwoLAME MP2 encoding library.
+
+%description libs -l pl
+Biblioteka koduj±ca MP2.
 
 %package devel
 Summary:	Header files for TwoLAME library
@@ -75,14 +81,15 @@ Statyczna biblioteka TwoLAME.
 %prep
 %setup -q
 
+sed -i -e 's/-O3//' configure.ac
+
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
-%configure \
-	--enable-shared \
-	--enable-static
+%configure
 
 %{__make}
 
@@ -105,7 +112,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/twolame
 %{_mandir}/man1/twolame.1*
-
 
 %files libs
 %defattr(644,root,root,755)
