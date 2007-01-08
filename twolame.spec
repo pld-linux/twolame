@@ -1,16 +1,19 @@
 Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
 Summary(pl):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
 Name:		twolame
-Version:	0.3.8
+Version:	0.3.9
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://www.ecs.soton.ac.uk/~njh/twolame/%{name}-%{version}.tar.gz
-# Source0-md5:	f1fe7fddfece5c7d01badee0bd703b33
+Source0:	http://dl.sourceforge.net/twolame/%{name}-%{version}.tar.gz
+# Source0-md5:	79be2e6c99495c767d037b977a32eab5
 URL:		http://www.twolame.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libsndfile-devel >= 1.0.0
+BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	sed >= 4.0
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,11 +41,18 @@ Cechy dodane do TwoLAME:
  - frontend obs³uguje wiele rodzajów plików wej¶ciowych (poprzez
    libsndfile)
 
+%package libs
+Summary:	TwoLAME MP2 encoding library
+Group:		Libraries
+
+%description libs
+TwoLAME MP2 encoding library.
+
 %package devel
 Summary:	Header files for TwoLAME library
 Summary(pl):	Pliki nag³ówkowe biblioteki TwoLAME
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Header files for TwoLAME library.
@@ -65,10 +75,15 @@ Statyczna biblioteka TwoLAME.
 %prep
 %setup -q
 
-sed -i -e 's/-O3//' configure
-
 %build
-%configure
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure \
+	--enable-shared \
+	--enable-static
+
 %{__make}
 
 %install
@@ -82,15 +97,19 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/twolame
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/twolame
-%attr(755,root,root) %{_libdir}/libtwolame.so.*.*.*
 %{_mandir}/man1/twolame.1*
+
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libtwolame.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
