@@ -1,5 +1,5 @@
 Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
-Summary(pl):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
+Summary(pl.UTF-8):   Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
 Name:		twolame
 Version:	0.3.9
 Release:	1
@@ -29,53 +29,53 @@ Features added to TwoLAME:
  - C99 compliant
  - Frontend supports wider range of input files (using libsndfile)
 
-%description -l pl
+%description -l pl.UTF-8
 TwoLAME to zoptymalizowany koder MPEG Audio Layer 2 (MP2) oparty na
-tooLAME Mike'a Chenga, kt髍y z kolei jest oparty na kodzie ISO dist10
+tooLAME Mike'a Chenga, kt贸ry z kolei jest oparty na kodzie ISO dist10
 i fragmentach LAME.
 
 Cechy dodane do TwoLAME:
- - pe硁a zgodno舵 z w眛kami
- - statyczna i wsp蟪dzielona biblioteka (libtwolame)
- - API bardzo podobne do API LAME (dla 砤twego portowania)
- - zgodno舵 z C99
- - frontend obs硊guje wiele rodzaj體 plik體 wej禼iowych (poprzez
+ - pe艂na zgodno艣膰 z w膮tkami
+ - statyczna i wsp贸艂dzielona biblioteka (libtwolame)
+ - API bardzo podobne do API LAME (dla 艂atwego portowania)
+ - zgodno艣膰 z C99
+ - frontend obs艂uguje wiele rodzaj贸w plik贸w wej艣ciowych (poprzez
    libsndfile)
 
 %package libs
 Summary:	TwoLAME MP2 encoding library
-Summary(pl):	Biblioteka koduj眂a MP2
+Summary(pl.UTF-8):   Biblioteka koduj膮ca MP2
 Group:		Libraries
 Conflicts:	twolame < 0.3.9
 
 %description libs
 TwoLAME MP2 encoding library.
 
-%description libs -l pl
-Biblioteka koduj眂a MP2.
+%description libs -l pl.UTF-8
+Biblioteka koduj膮ca MP2.
 
 %package devel
 Summary:	Header files for TwoLAME library
-Summary(pl):	Pliki nag丑wkowe biblioteki TwoLAME
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe biblioteki TwoLAME
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Header files for TwoLAME library.
 
-%description devel -l pl
-Pliki nag丑wkowe biblioteki TwoLAME.
+%description devel -l pl.UTF-8
+Pliki nag艂贸wkowe biblioteki TwoLAME.
 
 %package static
 Summary:	Static TwoLAME library
-Summary(pl):	Statyczna biblioteka TwoLAME
+Summary(pl.UTF-8):   Statyczna biblioteka TwoLAME
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static TwoLAME library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka TwoLAME.
 
 %prep
