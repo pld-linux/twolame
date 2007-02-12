@@ -1,5 +1,5 @@
 Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
-Summary(pl.UTF-8):   Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
+Summary(pl.UTF-8):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
 Name:		twolame
 Version:	0.3.9
 Release:	1
@@ -44,7 +44,7 @@ Cechy dodane do TwoLAME:
 
 %package libs
 Summary:	TwoLAME MP2 encoding library
-Summary(pl.UTF-8):   Biblioteka kodująca MP2
+Summary(pl.UTF-8):	Biblioteka kodująca MP2
 Group:		Libraries
 Conflicts:	twolame < 0.3.9
 
@@ -56,7 +56,7 @@ Biblioteka kodująca MP2.
 
 %package devel
 Summary:	Header files for TwoLAME library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki TwoLAME
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki TwoLAME
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
@@ -68,7 +68,7 @@ Pliki nagłówkowe biblioteki TwoLAME.
 
 %package static
 Summary:	Static TwoLAME library
-Summary(pl.UTF-8):   Statyczna biblioteka TwoLAME
+Summary(pl.UTF-8):	Statyczna biblioteka TwoLAME
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
