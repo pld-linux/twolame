@@ -1,12 +1,12 @@
 Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
 Summary(pl.UTF-8):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
 Name:		twolame
-Version:	0.3.10
+Version:	0.3.12
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/twolame/%{name}-%{version}.tar.gz
-# Source0-md5:	b63f840f6b4d706b1c24daddc3c3188a
+# Source0-md5:	d38c3ead5ac49b7425c1a9ef91126a35
 URL:		http://www.twolame.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7
@@ -116,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libtwolame.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtwolame.so.0
 
 %files devel
 %defattr(644,root,root,755)
