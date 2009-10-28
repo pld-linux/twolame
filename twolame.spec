@@ -7,6 +7,7 @@ License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/twolame/%{name}-%{version}.tar.gz
 # Source0-md5:	d38c3ead5ac49b7425c1a9ef91126a35
+Patch0:		automake18.patch
 URL:		http://www.twolame.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.7
@@ -80,6 +81,7 @@ Statyczna biblioteka TwoLAME.
 
 %prep
 %setup -q
+%patch0 -p1
 
 sed -i -e 's/-O3//' configure.ac
 

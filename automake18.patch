@@ -1,0 +1,22 @@
+--- twolame-0.3.12/configure.ac.orig	2009-10-28 18:25:24.649619488 +0100
++++ twolame-0.3.12/configure.ac	2009-10-28 18:25:45.148210666 +0100
+@@ -94,8 +94,8 @@
+ 	) ]
+ )
+ 			
+-AC_SUBST( SNDFILE_CFLAGS )
+-AC_SUBST( SNDFILE_LIBS )
++AC_SUBST(SNDFILE_CFLAGS)
++AC_SUBST(SNDFILE_LIBS)
+ 
+ 
+ 
+@@ -138,7 +138,7 @@
+ else 
+ 	AC_MSG_WARN([Not building twolame frontend because libsndfile is missing.])
+ fi
+-AC_SUBST( TWOLAME_BIN )
++AC_SUBST(TWOLAME_BIN)
+ 
+ 
+ dnl ############## Final Output
