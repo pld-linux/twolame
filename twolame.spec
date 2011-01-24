@@ -1,20 +1,18 @@
 Summary:	Optimized MPEG Audio Layer 2 (MP2) encoder
 Summary(pl.UTF-8):	Zoptymalizowany koder MPEG Audio Layer 2 (MP2)
 Name:		twolame
-Version:	0.3.12
+Version:	0.3.13
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/twolame/%{name}-%{version}.tar.gz
-# Source0-md5:	d38c3ead5ac49b7425c1a9ef91126a35
-Patch0:		automake18.patch
+Source0:	http://downloads.sourceforge.net/twolame/%{name}-%{version}.tar.gz
+# Source0-md5:	4113d8aa80194459b45b83d4dbde8ddb
 URL:		http://www.twolame.org/
-BuildRequires:	autoconf >= 2.57
-BuildRequires:	automake >= 1:1.7
+BuildRequires:	autoconf >= 2.60
+BuildRequires:	automake >= 1:1.10
 BuildRequires:	libsndfile-devel >= 1.0.0
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	pkgconfig
-BuildRequires:	sed >= 4.0
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -81,9 +79,6 @@ Statyczna biblioteka TwoLAME.
 
 %prep
 %setup -q
-%patch0 -p1
-
-sed -i -e 's/-O3//' configure.ac
 
 %build
 %{__libtoolize}
@@ -101,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_docdir}/twolame
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/twolame
 
 %clean
 rm -rf $RPM_BUILD_ROOT
